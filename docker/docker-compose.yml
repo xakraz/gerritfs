@@ -1,0 +1,25 @@
+version: '2'
+services:
+  gerrit:
+    image: docker.io/fabric8/gerrit:2.2.297
+    ports:
+    - "8080:8080"
+    - "29418:29418"
+    env_file:
+    - ./gerrit.env
+    volumes:
+      # Due to https://github.com/fabric8io/docker-gerrit/blob/master/bin/conf-and-run-gerrit.sh#L8-L29
+    - ./gerrit/ssh-admin-key:/root/.ssh
+      # Other documented volumes
+    - ./gerrit/ssh-keys:/home/gerrit/ssh-keys
+    - ./gerrit/site:/home/gerrit/site
+
+#  shell:
+#    build:
+#      context: ../
+#      dockerfile: Dockerfile.dev
+#      command: ['/bin/bash', 'while true']
+#    volumes:
+#    - ../:/workspace
+
+

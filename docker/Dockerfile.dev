@@ -1,0 +1,19 @@
+# = Use a Distro based image for dev
+#
+FROM ruby:2.3.3
+
+
+# Dependencies
+RUN apt update \
+  && apt install fuse \
+    libfuse-dev
+
+# Dev workspace
+WORKSPACE /workspace
+VOLUME /workspace
+
+# Bundle
+bundle install
+
+# SHELL
+CMD ['/bin/bash']
